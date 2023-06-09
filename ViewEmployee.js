@@ -91,7 +91,7 @@ const ViewEmployee = props => {
               <DataTable.Cell>{employee.FirstName}</DataTable.Cell>
               <DataTable.Cell>{employee.MiddleName}</DataTable.Cell>
               <DataTable.Cell>{employee.Salary}</DataTable.Cell>
-              <DataTable.Title>{employee.Deparment}</DataTable.Title>
+              <DataTable.Cell>{employee.Deparment}</DataTable.Cell>
             </DataTable.Row>
           ))
         : console.log('null')}

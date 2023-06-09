@@ -39,17 +39,27 @@ const Register = props => {
   const [Deparment, setDepartment] = useState('');
   const [Names, setNames] = useState('Ethiopia');
   const [valid, setValid] = useState(false);
+  const [display, setDisplay] = useState(false);
   const dispatch = useDispatch();
+
+  const reset = () => {
+    setFirstName('');
+    setMiddleName('');
+    setSalary('');
+    setDepartment('');
+  };
 
   useEffect(() => {
     Names === '' ? setValid(false) : setValid(true);
   }, [Names]);
-  const employeeData = {
-    FirstName,
-    MiddleName,
-    Salary,
-    Deparment,
-  };
+  const employeeData = [
+    {
+      FirstName,
+      MiddleName,
+      Salary,
+      Deparment,
+    },
+  ];
   const submitForm = async () => {
     try {
       console.log('step 1');
@@ -57,22 +67,43 @@ const Register = props => {
       console.log('step 2');
       if (registedEmployees !== null) {
         console.log('step 3');
-        const employees = [JSON.parse(registedEmployees)];
-        console.log('Step 4', employees, 'push', employeeData);
-        employees.push(employeeData);
-        console.log('Step 5 ', employees);
-        await AsyncStorage.setItem('Employees', JSON.stringify(employees));
-        console.log('registerd', employees);
+        const employees = JSON.parse(registedEmployees);
+        console.log('Step 4', employees, 'pushhhhhhhhhhhhhhhhh', employeeData);
+        const newData = employees.concat(employeeData);
+        console.log('here is the new data', newData);
+        await AsyncStorage.setItem('Employees', JSON.stringify(newData));
+        console.log('registerd', newData);
+        setDisplay(true);
+        reset();
       } else {
         await AsyncStorage.setItem('Employees', JSON.stringify(employeeData));
-        console.log('step 3 and half');
-        console.log('registerd and half');
+        console.log('registerd and half', employeeData);
+        setDisplay(true);
+
+        reset();
       }
     } catch (error) {
       console.log('HERE IS the error', error);
     }
   };
-
+  const Message = (
+    <Text
+      style={{
+        margin: 5,
+        color: 'green',
+        textAlign: 'center',
+        display: display ? 'flex' : 'none',
+      }}>
+      Employee Registerd
+    </Text>
+  );
+  useEffect(() => {
+    if (display) {
+      setTimeout(() => {
+        setDisplay(false);
+      }, 5000);
+    }
+  }, [display]);
   return (
     <View
       style={{
@@ -82,6 +113,7 @@ const Register = props => {
       }}>
       <TextInput
         placeholder="First Name"
+        value={FirstName}
         onChangeText={firstname => setFirstName(firstname)}
         style={{
           borderColor: 'black',
@@ -92,6 +124,7 @@ const Register = props => {
       />
       <TextInput
         placeholder="Middle Name"
+        value={MiddleName}
         onChangeText={middlename => setMiddleName(middlename)}
         style={{
           borderColor: 'black',
@@ -102,6 +135,7 @@ const Register = props => {
       />
       <TextInput
         placeholder="Salary"
+        value={Salary}
         onChangeText={salary => setSalary(salary)}
         style={{
           borderColor: 'black',
@@ -112,6 +146,7 @@ const Register = props => {
       />
       <TextInput
         placeholder="Deparment"
+        value={Deparment}
         onChangeText={deparment => setDepartment(deparment)}
         style={{
           borderColor: 'black',
@@ -124,9 +159,10 @@ const Register = props => {
           {
             width: '90%',
             margin: 10,
-            backgroundColor: 'red',
+            backgroundColor: 'white',
           },
         ]}>
+        {Message}
         <Button title="Register" onPress={submitForm} />
       </View>
     </View>
