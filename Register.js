@@ -37,6 +37,7 @@ const Register = props => {
   const [MiddleName, setMiddleName] = useState('');
   const [Salary, setSalary] = useState('');
   const [Deparment, setDepartment] = useState('');
+  const [IdNumber, setID] = useState(Math.floor(Math.random() * 9000) + 1000);
   const [Names, setNames] = useState('Ethiopia');
   const [valid, setValid] = useState(false);
   const [display, setDisplay] = useState(false);
@@ -47,6 +48,7 @@ const Register = props => {
     setMiddleName('');
     setSalary('');
     setDepartment('');
+    setID('');
   };
 
   useEffect(() => {
@@ -58,6 +60,7 @@ const Register = props => {
       MiddleName,
       Salary,
       Deparment,
+      IdNumber,
     },
   ];
   const submitForm = async () => {
@@ -154,6 +157,20 @@ const Register = props => {
           margin: 2,
         }}
       />
+      <TextInput
+        placeholder="Deparment"
+        value={IdNumber}
+        onChangeText={deparment =>
+          setID(Math.floor(Math.random() * 9000) + 1000)
+        }
+        style={{
+          borderColor: 'black',
+          borderWidth: 1,
+          margin: 2,
+          display: 'none',
+        }}
+      />
+
       <View
         style={[
           {

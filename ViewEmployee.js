@@ -80,6 +80,7 @@ const ViewEmployee = props => {
   return (
     <DataTable style={styles.container}>
       <DataTable.Header style={styles.tableHeader}>
+        <DataTable.Title>ID</DataTable.Title>
         <DataTable.Title>First Name</DataTable.Title>
         <DataTable.Title>Middle Name</DataTable.Title>
         <DataTable.Title>Salary</DataTable.Title>
@@ -88,6 +89,7 @@ const ViewEmployee = props => {
       {allEmployees
         ? allEmployees.map(employee => (
             <DataTable.Row>
+              <DataTable.Cell>{employee.IdNumber}</DataTable.Cell>
               <DataTable.Cell>{employee.FirstName}</DataTable.Cell>
               <DataTable.Cell>{employee.MiddleName}</DataTable.Cell>
               <DataTable.Cell>{employee.Salary}</DataTable.Cell>
