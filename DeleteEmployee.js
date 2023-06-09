@@ -128,6 +128,7 @@ const DeleteEmployee = props => {
       }}>
       <TextInput
         placeholder="Enter ID Here"
+        keyboardType="numeric"
         value={IdNumber}
         onChangeText={Id => setID(parseInt(Id))}
         style={{

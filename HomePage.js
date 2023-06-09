@@ -45,7 +45,7 @@ const HomePage = props => {
         alignItems: 'center',
       }}>
       <Text style={{fontSize: 20}}> Employee Application </Text>
-      <Text style={{fontSize: 15}}> By: Semret Zerihun </Text>
+      <Text style={{fontSize: 15}}> By: Semret Zerihun (C.S) </Text>
 
       <View
         style={[
@@ -54,7 +54,7 @@ const HomePage = props => {
             margin: 10,
             backgroundColor: 'red',
             position: 'absolute',
-            top: 300,
+            top: 200,
           },
         ]}>
         <Button
@@ -70,10 +70,14 @@ const HomePage = props => {
             margin: 10,
             backgroundColor: 'red',
             position: 'absolute',
-            top: 350,
+            top: 250,
           },
         ]}>
-        <Button title="Update Employee" color="green" />
+        <Button
+          title="Update Employee"
+          color="green"
+          onPress={() => props.navigation.navigate('UpdateEmployee')}
+        />
       </View>
       <View
         style={[
@@ -82,7 +86,7 @@ const HomePage = props => {
             margin: 10,
             backgroundColor: 'red',
             position: 'absolute',
-            top: 400,
+            top: 300,
           },
         ]}>
         <Button
@@ -98,13 +102,29 @@ const HomePage = props => {
             margin: 10,
             backgroundColor: 'red',
             position: 'absolute',
-            top: 450,
+            top: 350,
           },
         ]}>
         <Button
           title="Delete Employee"
           color="red"
           onPress={() => props.navigation.navigate('DeleteEmployee')}
+        />
+      </View>
+      <View
+        style={[
+          {
+            width: '90%',
+            margin: 10,
+            backgroundColor: 'white',
+            position: 'absolute',
+            top: 400,
+          },
+        ]}>
+        <Button
+          title="View Map"
+          color="gold"
+          onPress={() => props.navigation.navigate('Map')}
         />
       </View>
     </View>

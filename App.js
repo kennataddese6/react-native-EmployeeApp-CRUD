@@ -35,7 +35,8 @@ import Register from './Register';
 import HomePage from './HomePage';
 import ViewEmployee from './ViewEmployee';
 import DeleteEmployee from './DeleteEmployee';
-import UpdateEmployee from '/UpdateEmployee';
+import UpdateEmployee from './UpdateEmployee';
+import Map from './Map';
 const Stack = createNativeStackNavigator();
 const MyStack = () => {
   return (
@@ -65,6 +66,7 @@ const MyStack = () => {
         component={UpdateEmployee}
         options={{title: 'Update Employee'}}
       />
+      <Stack.Screen name="Map" component={Map} options={{title: 'View Map'}} />
     </Stack.Navigator>
   );
 };

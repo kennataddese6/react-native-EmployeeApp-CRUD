@@ -37,8 +37,9 @@ const UpdateEmployee = props => {
   const [MiddleName, setMiddleName] = useState('');
   const [Salary, setSalary] = useState('');
   const [Deparment, setDepartment] = useState('');
-  const [IdNumber, setID] = useState(Math.floor(Math.random() * 9000) + 1000);
-  const [Names, setNames] = useState('Ethiopia');
+  const [IdNumber, setID] = useState('');
+  const [error, setError] = useState(false);
+
   const [valid, setValid] = useState(false);
   const [display, setDisplay] = useState(false);
   const dispatch = useDispatch();
@@ -51,18 +52,6 @@ const UpdateEmployee = props => {
     setID('');
   };
 
-  useEffect(() => {
-    Names === '' ? setValid(false) : setValid(true);
-  }, [Names]);
-  const employeeData = [
-    {
-      FirstName,
-      MiddleName,
-      Salary,
-      Deparment,
-      IdNumber,
-    },
-  ];
   const submitForm = async () => {
     try {
       console.log('step 1');
@@ -71,16 +60,35 @@ const UpdateEmployee = props => {
       if (registedEmployees !== null) {
         console.log('step 3');
         const employees = JSON.parse(registedEmployees);
-        console.log('Step 4', employees, 'pushhhhhhhhhhhhhhhhh', employeeData);
-        const newData = employees.concat(employeeData);
-        console.log('here is the new data', newData);
-        await AsyncStorage.setItem('Employees', JSON.stringify(newData));
-        console.log('registerd', newData);
-        setDisplay(true);
-        reset();
+        const filterdEmployee = employees.filter(
+          employee => employee.IdNumber !== IdNumber,
+        );
+        if (filterdEmployee.length === employees.length) {
+          setError(true);
+          console.log('employee not found');
+        } else {
+          const UpdateEmployees = employees.map(employee => {
+            if (employee.IdNumber === IdNumber) {
+              console.log('employeee is found and is updating');
+              return {
+                ...employee,
+                FirstName: `${FirstName}`,
+                MiddleName: `${MiddleName}`,
+                Salary: `${Salary}`,
+                Deparment: `${Deparment}`,
+              };
+            } else {
+              return employee;
+            }
+          });
+          await AsyncStorage.setItem(
+            'Employees',
+            JSON.stringify(UpdateEmployees),
+          );
+          setDisplay(true);
+          reset();
+        }
       } else {
-        await AsyncStorage.setItem('Employees', JSON.stringify(employeeData));
-        console.log('registerd and half', employeeData);
         setDisplay(true);
 
         reset();
@@ -97,7 +105,18 @@ const UpdateEmployee = props => {
         textAlign: 'center',
         display: display ? 'flex' : 'none',
       }}>
-      Employee Registerd
+      Employee Updated Successfully
+    </Text>
+  );
+  const errorMessage = (
+    <Text
+      style={{
+        margin: 5,
+        color: 'red',
+        textAlign: 'center',
+        display: error ? 'flex' : 'none',
+      }}>
+      Employee not found!
     </Text>
   );
   useEffect(() => {
@@ -106,7 +125,12 @@ const UpdateEmployee = props => {
         setDisplay(false);
       }, 5000);
     }
-  }, [display]);
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
+    }
+  }, [display, error]);
   return (
     <View
       style={{
@@ -115,11 +139,10 @@ const UpdateEmployee = props => {
         left: 40,
       }}>
       <TextInput
-        placeholder="Deparment"
+        placeholder="Enter ID Here"
+        keyboardType="numeric"
         value={IdNumber}
-        onChangeText={deparment =>
-          setID(Math.floor(Math.random() * 9000) + 1000)
-        }
+        onChangeText={id => setID(parseInt(id))}
         style={{
           borderColor: 'black',
           borderWidth: 1,
@@ -179,7 +202,8 @@ const UpdateEmployee = props => {
           },
         ]}>
         {Message}
-        <Button title="Update" onPress={submitForm} />
+        {errorMessage}
+        <Button title="Update" onPress={submitForm} color="green" />
       </View>
     </View>
   );
