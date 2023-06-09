@@ -101,7 +101,11 @@ const HomePage = props => {
             top: 450,
           },
         ]}>
-        <Button title="Delete Employee" color="red" />
+        <Button
+          title="Delete Employee"
+          color="red"
+          onPress={() => props.navigation.navigate('DeleteEmployee')}
+        />
       </View>
     </View>
   );

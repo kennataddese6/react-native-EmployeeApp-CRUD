@@ -34,6 +34,8 @@ import {
 import Register from './Register';
 import HomePage from './HomePage';
 import ViewEmployee from './ViewEmployee';
+import DeleteEmployee from './DeleteEmployee';
+import UpdateEmployee from '/UpdateEmployee';
 const Stack = createNativeStackNavigator();
 const MyStack = () => {
   return (
@@ -52,6 +54,16 @@ const MyStack = () => {
         name="ViewEmployee"
         component={ViewEmployee}
         options={{title: 'View Employee'}}
+      />
+      <Stack.Screen
+        name="DeleteEmployee"
+        component={DeleteEmployee}
+        options={{title: 'Delete Employee'}}
+      />
+      <Stack.Screen
+        name="UpdateEmployee"
+        component={UpdateEmployee}
+        options={{title: 'Update Employee'}}
       />
     </Stack.Navigator>
   );
