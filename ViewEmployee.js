@@ -131,25 +131,29 @@ const ViewEmployee = props => {
         <DataTable.Title>Deparment</DataTable.Title>
         <DataTable.Title>Salary</DataTable.Title>
       </DataTable.Header>
-      <ScrollView>
+      <ScrollView style={{position: 'relative', bottom: 10}}>
         <DataTable style={styles.container}>
-          {allEmployees
-            ? allEmployees.map(employee => (
-                <DataTable.Row key={employee.IdNumber}>
-                  <DataTable.Cell>{employee.IdNumber}</DataTable.Cell>
-                  <DataTable.Cell>{employee.FirstName}</DataTable.Cell>
-                  <DataTable.Cell>{employee.MiddleName}</DataTable.Cell>
-                  <DataTable.Cell>{employee.Deparment}</DataTable.Cell>
-                  <DataTable.Cell>
-                    {employee.Salary.toString().replace(
-                      /\B(?=(\d{3})+(?!\d))/g,
-                      ',',
-                    )}
-                    ETB
-                  </DataTable.Cell>
-                </DataTable.Row>
-              ))
-            : console.log('null')}
+          {allEmployees ? (
+            allEmployees.map(employee => (
+              <DataTable.Row key={employee.IdNumber}>
+                <DataTable.Cell>{employee.IdNumber}</DataTable.Cell>
+                <DataTable.Cell>{employee.FirstName}</DataTable.Cell>
+                <DataTable.Cell>{employee.MiddleName}</DataTable.Cell>
+                <DataTable.Cell>{employee.Deparment}</DataTable.Cell>
+                <DataTable.Cell>
+                  {employee.Salary.toString().replace(
+                    /\B(?=(\d{3})+(?!\d))/g,
+                    ',',
+                  )}
+                  ETB
+                </DataTable.Cell>
+              </DataTable.Row>
+            ))
+          ) : (
+            <DataTable.Row>
+              <DataTable.Cell>No Rows To Show</DataTable.Cell>
+            </DataTable.Row>
+          )}
         </DataTable>
       </ScrollView>
     </View>

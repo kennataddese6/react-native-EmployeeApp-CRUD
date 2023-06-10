@@ -52,6 +52,7 @@ const UpdateEmployee = props => {
     setSalary('');
     setDepartment('');
     setID('');
+    setChecked('');
   };
 
   const submitForm = async () => {
