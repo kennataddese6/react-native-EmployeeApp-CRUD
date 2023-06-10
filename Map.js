@@ -13,8 +13,8 @@ const Map = () => {
         <MapView
           style={styles.mapStyle}
           initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: 7.67344,
+            longitude: 36.83441,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
@@ -22,8 +22,8 @@ const Map = () => {
           <Marker
             draggable
             coordinate={{
-              latitude: 37.78825,
-              longitude: -122.4324,
+              latitude: 7.67344,
+              longitude: 36.83441,
             }}
             onDragEnd={e => alert(JSON.stringify(e.nativeEvent.coordinate))}
             title={'Test Marker'}

@@ -144,7 +144,7 @@ const DeleteEmployee = props => {
           {
             width: '90%',
             margin: 10,
-            backgroundColor: 'white',
+            backgroundColor: 'GhostWhite',
           },
         ]}>
         {Message}

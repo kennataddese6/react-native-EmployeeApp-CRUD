@@ -8,7 +8,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {DataTable} from 'react-native-paper';
+import {DataTable, RadioButton} from 'react-native-paper';
 
 import {
   SafeAreaView,
@@ -41,7 +41,7 @@ const ViewEmployee = props => {
   const [Deparment, setDepartment] = useState('');
   const dispatch = useDispatch();
   const [allEmployees, setAllEmployees] = useState([]);
-  const {employees} = useSelector(state => state.employees);
+  const [search, setSearch] = useState('');
   let Employees = [];
 
   const getEmployee = async () => {
@@ -50,8 +50,6 @@ const ViewEmployee = props => {
       if (emps !== null) {
         Employees = JSON.parse(emps);
         setAllEmployees(JSON.parse(emps));
-        console.log('here is let Em', Employees);
-        console.log('here are all the employess', allEmployees);
       }
     } catch (error) {
       console.log('here is error for getitem', error);
@@ -64,7 +62,26 @@ const ViewEmployee = props => {
       console.log('Department is', employee.FirstName);
     });
   }, []);
-  console.log('here is let Em2', Employees);
+
+  useEffect(() => {
+    let filteredEmployees = [];
+    allEmployees.filter(oneEmployee => {
+      if (oneEmployee.FirstName.toLowerCase().includes(search.toLowerCase())) {
+        filteredEmployees.push(oneEmployee);
+        console.log('here is the search', search);
+        if (search === '') {
+          getEmployee();
+        }
+      } else {
+        console.log('i am here');
+        console.log(`${oneEmployee.FirstName.toLowerCase()} vs ${search}`);
+      }
+    });
+    console.log('filllllll', !filteredEmployees.length);
+    if (filteredEmployees.length) {
+      setAllEmployees(filteredEmployees);
+    }
+  }, [search]);
 
   const styles = StyleSheet.create({
     container: {
@@ -76,28 +93,66 @@ const ViewEmployee = props => {
       fontSize: 18,
       height: 44,
     },
+    searchBar: {
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      marginHorizontal: 20,
+      marginVertical: 10,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+
+      elevation: 5,
+    },
+    searchInput: {
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      fontSize: 16,
+    },
   });
   return (
-    <DataTable style={styles.container}>
+    <View>
+      <View style={styles.searchBar}>
+        <TextInput
+          placeholder="Search Employee"
+          style={styles.searchInput}
+          onChangeText={word => setSearch(word)}
+          value={search}
+        />
+      </View>
       <DataTable.Header style={styles.tableHeader}>
         <DataTable.Title>ID</DataTable.Title>
         <DataTable.Title>First Name</DataTable.Title>
         <DataTable.Title>Middle Name</DataTable.Title>
-        <DataTable.Title>Salary</DataTable.Title>
         <DataTable.Title>Deparment</DataTable.Title>
+        <DataTable.Title>Salary</DataTable.Title>
       </DataTable.Header>
-      {allEmployees
-        ? allEmployees.map(employee => (
-            <DataTable.Row>
-              <DataTable.Cell>{employee.IdNumber}</DataTable.Cell>
-              <DataTable.Cell>{employee.FirstName}</DataTable.Cell>
-              <DataTable.Cell>{employee.MiddleName}</DataTable.Cell>
-              <DataTable.Cell>{employee.Salary}</DataTable.Cell>
-              <DataTable.Cell>{employee.Deparment}</DataTable.Cell>
-            </DataTable.Row>
-          ))
-        : console.log('null')}
-    </DataTable>
+      <ScrollView>
+        <DataTable style={styles.container}>
+          {allEmployees
+            ? allEmployees.map(employee => (
+                <DataTable.Row key={employee.IdNumber}>
+                  <DataTable.Cell>{employee.IdNumber}</DataTable.Cell>
+                  <DataTable.Cell>{employee.FirstName}</DataTable.Cell>
+                  <DataTable.Cell>{employee.MiddleName}</DataTable.Cell>
+                  <DataTable.Cell>{employee.Deparment}</DataTable.Cell>
+                  <DataTable.Cell>
+                    {employee.Salary.toString().replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ',',
+                    )}
+                    ETB
+                  </DataTable.Cell>
+                </DataTable.Row>
+              ))
+            : console.log('null')}
+        </DataTable>
+      </ScrollView>
+    </View>
   );
 };
 export default ViewEmployee;

@@ -10,6 +10,7 @@ import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {createEmployee} from './employeeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {RadioButton} from 'react-native-paper';
 
 import {
   SafeAreaView,
@@ -39,6 +40,7 @@ const UpdateEmployee = props => {
   const [Deparment, setDepartment] = useState('');
   const [IdNumber, setID] = useState('');
   const [error, setError] = useState(false);
+  const [checked, setChecked] = useState('');
 
   const [valid, setValid] = useState(false);
   const [display, setDisplay] = useState(false);
@@ -131,11 +133,18 @@ const UpdateEmployee = props => {
       }, 5000);
     }
   }, [display, error]);
+  const styles = StyleSheet.create({
+    radioButtonContainer: {
+      flexDirection: 'row',
+      alignItems: 'flex-end',
+      marginHorizontal: 58,
+    },
+  });
   return (
     <View
       style={{
         position: 'absolute',
-        top: 190,
+        top: 120,
         left: 40,
       }}>
       <TextInput
@@ -171,8 +180,17 @@ const UpdateEmployee = props => {
           margin: 2,
         }}
       />
+      <RadioButton.Group onValueChange={setChecked} value={checked}>
+        <View style={styles.radioButtonContainer}>
+          <Text>Male</Text>
+          <RadioButton value="Male" />
+          <Text>Female</Text>
+          <RadioButton value="Female" />
+        </View>
+      </RadioButton.Group>
       <TextInput
         placeholder="Salary"
+        keyboardType="numeric"
         value={Salary}
         onChangeText={salary => setSalary(salary)}
         style={{
@@ -198,7 +216,7 @@ const UpdateEmployee = props => {
           {
             width: '90%',
             margin: 10,
-            backgroundColor: 'white',
+            backgroundColor: 'GhostWhite',
           },
         ]}>
         {Message}
