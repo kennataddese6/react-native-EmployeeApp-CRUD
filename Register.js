@@ -33,7 +33,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Register = props => {
+const Register = () => {
   const [FirstName, setFirstName] = useState('');
   const [MiddleName, setMiddleName] = useState('');
   const [Salary, setSalary] = useState('');
@@ -68,6 +68,23 @@ const Register = props => {
   ];
   const submitForm = async randomNumber => {
     setID(randomNumber);
+    if (FirstName.trim() === '') {
+      alert('First Name is required');
+      return;
+    }
+    if (MiddleName.trim() === '') {
+      alert('Middle Name is required');
+      return;
+    }
+    if (Salary.trim() === '') {
+      alert('Salary is required');
+      return;
+    }
+    if (Deparment.trim() === '') {
+      alert('Department is required');
+      return;
+    }
+
     try {
       console.log('step 1');
       const registedEmployees = await AsyncStorage.getItem('Employees');
@@ -175,19 +192,6 @@ const Register = props => {
           borderColor: 'black',
           borderWidth: 1,
           margin: 2,
-        }}
-      />
-      <TextInput
-        placeholder="Deparment"
-        value={IdNumber}
-        onChangeText={deparment =>
-          setID(Math.floor(Math.random() * 9000) + 1000)
-        }
-        style={{
-          borderColor: 'black',
-          borderWidth: 1,
-          margin: 2,
-          display: 'none',
         }}
       />
 

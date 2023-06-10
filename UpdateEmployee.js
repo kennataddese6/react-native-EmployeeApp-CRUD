@@ -33,7 +33,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const UpdateEmployee = props => {
+const UpdateEmployee = () => {
   const [FirstName, setFirstName] = useState('');
   const [MiddleName, setMiddleName] = useState('');
   const [Salary, setSalary] = useState('');
@@ -56,6 +56,22 @@ const UpdateEmployee = props => {
   };
 
   const submitForm = async () => {
+    if (FirstName.trim() === '') {
+      alert('First Name is required');
+      return;
+    }
+    if (MiddleName.trim() === '') {
+      alert('Middle Name is required');
+      return;
+    }
+    if (Salary.trim() === '') {
+      alert('Salary is required');
+      return;
+    }
+    if (Deparment.trim() === '') {
+      alert('Department is required');
+      return;
+    }
     try {
       console.log('step 1');
       const registedEmployees = await AsyncStorage.getItem('Employees');

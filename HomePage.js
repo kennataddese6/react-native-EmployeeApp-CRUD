@@ -46,6 +46,7 @@ const HomePage = props => {
       }}>
       <Text style={{fontSize: 20}}> Employee Application </Text>
       <Text style={{fontSize: 15}}> By: Semret Zerihun (C.S) </Text>
+      <Text style={{fontSize: 15}}> ID: EU0092/12 (2015 E.C) </Text>
 
       <View
         style={[

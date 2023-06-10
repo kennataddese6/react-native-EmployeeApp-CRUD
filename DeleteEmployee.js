@@ -137,6 +137,7 @@ const DeleteEmployee = props => {
           width: 300,
           margin: 2,
         }}
+        required
       />
 
       <View
