@@ -1,43 +1,12 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
  *
  * @format
  */
 
 import React from 'react';
-import {useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Button,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Register from './Register';
+import {Text, View, Image, Button} from 'react-native';
 
 const HomePage = props => {
-  const [Names, setNames] = useState('Ethiopia');
-  const [valid, setValid] = useState(false);
-  const FirstName = 'Kenna';
-  useEffect(() => {
-    Names === '' ? setValid(false) : setValid(true);
-  }, [Names]);
   return (
     <View
       style={{

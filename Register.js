@@ -1,37 +1,13 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
  *
  * @format
  */
 
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {createEmployee} from './employeeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RadioButton} from 'react-native-paper';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Button,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {StyleSheet, Text, TextInput, View, Button} from 'react-native';
 
 const Register = () => {
   const [FirstName, setFirstName] = useState('');
@@ -39,12 +15,8 @@ const Register = () => {
   const [Salary, setSalary] = useState('');
   const [Deparment, setDepartment] = useState('');
   const [IdNumber, setID] = useState(Math.floor(Math.random() * 9000) + 1000);
-  const [Names, setNames] = useState('Ethiopia');
-  const [valid, setValid] = useState(false);
   const [display, setDisplay] = useState(false);
   const [checked, setChecked] = useState('');
-
-  const dispatch = useDispatch();
 
   const reset = () => {
     setFirstName('');
@@ -54,9 +26,6 @@ const Register = () => {
     setChecked('');
   };
 
-  useEffect(() => {
-    Names === '' ? setValid(false) : setValid(true);
-  }, [Names]);
   const employeeData = [
     {
       FirstName,

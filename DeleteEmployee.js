@@ -1,53 +1,19 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
  *
  * @format
  */
 
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {createEmployee} from './employeeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Button,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Text, TextInput, View, Button} from 'react-native';
 
 const DeleteEmployee = props => {
-  const [FirstName, setFirstName] = useState('');
-  const [MiddleName, setMiddleName] = useState('');
-  const [Salary, setSalary] = useState('');
-  const [Deparment, setDepartment] = useState('');
   const [IdNumber, setID] = useState('');
-  const [valid, setValid] = useState(false);
   const [display, setDisplay] = useState(false);
   const [error, setError] = useState(false);
-  const dispatch = useDispatch();
 
   const reset = () => {
-    setFirstName('');
-    setMiddleName('');
-    setSalary('');
-    setDepartment('');
     setID('');
   };
 

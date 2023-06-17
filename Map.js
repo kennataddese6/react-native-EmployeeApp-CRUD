@@ -130,9 +130,6 @@ const Map = () => {
         <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>Restaurants</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>Pharmacies</Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -159,7 +156,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     marginVertical: 10,
-    marginHorizontal: 10,
     backgroundColor: 'transparent',
   },
   button: {

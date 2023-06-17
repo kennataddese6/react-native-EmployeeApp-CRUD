@@ -1,37 +1,12 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
  * @format
  */
 
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {createEmployee} from './employeeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RadioButton} from 'react-native-paper';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Button,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {StyleSheet, Text, TextInput, View, Button} from 'react-native';
 
 const UpdateEmployee = () => {
   const [FirstName, setFirstName] = useState('');
@@ -41,10 +16,7 @@ const UpdateEmployee = () => {
   const [IdNumber, setID] = useState('');
   const [error, setError] = useState(false);
   const [checked, setChecked] = useState('');
-
-  const [valid, setValid] = useState(false);
   const [display, setDisplay] = useState(false);
-  const dispatch = useDispatch();
 
   const reset = () => {
     setFirstName('');

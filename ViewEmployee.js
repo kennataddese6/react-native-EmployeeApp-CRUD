@@ -1,45 +1,14 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
  * @format
  */
 
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {DataTable, RadioButton} from 'react-native-paper';
-
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Image,
-  Button,
-  FlatList,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {getEmployee} from './employeeSlice';
+import {DataTable} from 'react-native-paper';
+import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ViewEmployee = props => {
-  const [FirstName, setFirstName] = useState('');
-  const [MiddleName, setMiddleName] = useState('');
-  const [Salary, setSalary] = useState('');
-  const [Deparment, setDepartment] = useState('');
-  const dispatch = useDispatch();
+const ViewEmployee = () => {
   const [allEmployees, setAllEmployees] = useState([]);
   const [search, setSearch] = useState('');
   let Employees = [];
